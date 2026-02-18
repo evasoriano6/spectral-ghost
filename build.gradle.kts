@@ -52,13 +52,7 @@ android {
         kotlinCompilerExtensionVersion = "1.5.1"
     }
 
-    sourceSets {
-        getByName("main") {
-            manifest.srcFile("AndroidManifest.xml")
-            java.srcDirs("ui", "data", "domain", "di")
-            res.srcDirs("res")
-        }
-    }
+
 }
 
 dependencies {

@@ -2,7 +2,7 @@
 set GIT_PATH="C:\Program Files\Git\cmd\git.exe"
 
 echo Adding fixes...
-%GIT_PATH% add .
+%GIT_PATH% add -A
 if %errorlevel% neq 0 exit /b %errorlevel%
 
 echo Committing...
