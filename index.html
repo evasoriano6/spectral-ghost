@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPECTRAL-01 | Military-Grade Analysis</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono:wght@300;500;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div id="app-container">
+        <!-- Visual Layers -->
+        <video id="camera-view" autoplay playsinline></video>
+        <canvas id="vision-canvas"></canvas>
+
+        <!-- Top Bar -->
+        <header class="top-bar">
+            <div class="brand">SPECTRAL-01 <span style="font-size: 0.6em; color: #444;">V.MIL.5.0</span></div>
+            <div class="status-indicator">
+                <div class="status-dot" id="system-dot"></div>
+                <span id="system-status">SISTEMA NOMINAL</span>
+            </div>
+        </header>
+
+        <!-- Left HUD: Precision Metrics -->
+        <aside class="hud-panel side-panel left-panel">
+            <div class="metric-group">
+                <span class="metric-label">VARIACIÓN LUMÍNICA (ΔL)</span>
+                <div class="metric-value-row">
+                    <span class="metric-value" id="val-lum">0.000</span>
+                    <span class="metric-unit">%</span>
+                </div>
+                <div class="precision-bar-bg">
+                    <div class="precision-bar-fill" id="bar-lum"></div>
+                </div>
+            </div>
+
+            <div class="metric-group">
+                <span class="metric-label">CAMPO ELECTROMAGNÉTICO</span>
+                <div class="metric-value-row">
+                    <span class="metric-value" id="val-emi">0.400</span>
+                    <span class="metric-unit">μT</span>
+                </div>
+                <div class="precision-bar-bg">
+                    <div class="precision-bar-fill" id="bar-emi"></div>
+                </div>
+            </div>
+
+            <div class="metric-group">
+                <span class="metric-label">DENSIDAD ESPECTRAL</span>
+                <div class="metric-value-row">
+                    <span class="metric-value" id="val-spec">0.012</span>
+                    <span class="metric-unit">σ</span>
+                </div>
+                <div class="precision-bar-bg">
+                    <div class="precision-bar-fill" id="bar-spec"></div>
+                </div>
+            </div>
+
+            <div style="margin-top: auto; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px;">
+                <span class="metric-label">COHERENCIA DE SEÑAL</span>
+                <div class="metric-value-row" style="margin-top: 5px;">
+                    <span class="metric-value" style="font-size: 1rem; color: var(--accent-success);"
+                        id="val-coh">99.8%</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Right HUD: Audio Analysis -->
+        <aside class="hud-panel side-panel right-panel">
+            <span class="metric-label">ANÁLISIS DE ESPECTRO (FFT)</span>
+            <div id="oscilloscope-container">
+                <canvas id="oscilloscope-canvas"></canvas>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <span class="metric-label">FRECUENCIA DOMINANTE</span>
+                <div class="metric-value-row">
+                    <span class="metric-value" id="val-freq">00.0</span>
+                    <span class="metric-unit">Hz</span>
+                </div>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <span class="metric-label">CONFIRMACIÓN INTELIGENTE</span>
+                <div class="metric-value-row">
+                    <span class="metric-value" id="val-entropy" style="color: #666;">---</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Bottom Controls -->
+        <footer class="bottom-bar">
+            <button class="tech-btn" id="btn-scan">
+                INICIALIZAR ESCANEO
+            </button>
+            <button class="tech-btn" id="btn-share">
+                COMPARTIR DATOS
+            </button>
+            <button class="tech-btn tech-btn-alert" id="btn-evp">
+                ACTIVAR MÓDULO EVP
+            </button>
+        </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>

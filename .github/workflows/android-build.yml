@@ -1,0 +1,45 @@
+name: Build and Distribute SPECTRAL-01
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v3
+
+    - name: Setup Android NDK
+      run: sdkmanager "ndk;26.1.10909125" "cmake;3.22.1"
+
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+
+    - name: Build Debug APK
+      run: ./gradlew assembleDebug --stacktrace
+
+    - name: Rename APK
+      run: mv build/outputs/apk/debug/*.apk build/outputs/apk/debug/spectral-ghost.apk
+
+    - name: Upload to Firebase App Distribution
+      uses: wzieba/Firebase-Distribution-Github-Action@v1
+      with:
+        appId: ${{ secrets.FIREBASE_APP_ID }}
+        serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
+        groups: testers
+        testers: "lauraleomilan@gmail.com"
+        file: build/outputs/apk/debug/spectral-ghost.apk
+        releaseNotes: "SPECTRAL-01 Automatic Build - Debug Version. Native Core: ACTIVE."
