@@ -8,8 +8,6 @@ add_library(
         native-lib
         SHARED
         native/NativeBridge.cpp
-        native/AudioEngine.cpp
-        native/ThermalFilter.cpp
 )
 
 # Search for system libraries
